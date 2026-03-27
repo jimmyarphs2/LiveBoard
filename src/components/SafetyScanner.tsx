@@ -59,40 +59,53 @@ export function SafetyScanner({ content, type, onScanComplete }: SafetyScannerPr
     <AnimatePresence mode="wait">
       {status !== 'idle' && (
         <motion.div 
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          className={`mt-2 p-3 rounded-lg border flex items-start gap-3 transition-colors ${
-            status === 'scanning' ? 'bg-zinc-900 border-zinc-800' :
-            status === 'safe' ? 'bg-emerald-500/5 border-emerald-500/10' :
-            'bg-rose-500/5 border-rose-500/10'
+          exit={{ opacity: 0, y: -10 }}
+          className={`mt-4 p-5 rounded-2xl border flex items-start gap-4 backdrop-blur-xl transition-all duration-500 shadow-2xl ${
+            status === 'scanning' ? 'bg-white/5 border-white/10' :
+            status === 'safe' ? 'bg-emerald-500/5 border-emerald-500/20 shadow-emerald-500/5' :
+            'bg-rose-500/5 border-rose-500/20 shadow-rose-500/5'
           }`}
         >
-          <div className="shrink-0 mt-0.5">
-            {status === 'scanning' && <Loader2 className="w-4 h-4 text-zinc-500 animate-spin" />}
-            {status === 'safe' && <ShieldCheck className="w-4 h-4 text-emerald-400" />}
-            {status === 'unsafe' && <ShieldAlert className="w-4 h-4 text-rose-400" />}
+          <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${
+            status === 'scanning' ? 'bg-white/5' :
+            status === 'safe' ? 'bg-emerald-500/10' :
+            'bg-rose-500/10'
+          }`}>
+            {status === 'scanning' && <Loader2 className="w-5 h-5 text-white/40 animate-spin" />}
+            {status === 'safe' && <ShieldCheck className="w-5 h-5 text-emerald-400 glow-emerald" />}
+            {status === 'unsafe' && <ShieldAlert className="w-5 h-5 text-rose-400 glow-rose" />}
           </div>
-          <div className="space-y-1">
-            <p className={`text-xs font-bold uppercase tracking-wider ${
-              status === 'scanning' ? 'text-zinc-500' :
-              status === 'safe' ? 'text-emerald-400' :
-              'text-rose-400'
-            }`}>
-              {status === 'scanning' ? 'AI Safety Scan in Progress...' :
-               status === 'safe' ? 'Content Verified Safe' :
-               `Safety Warning: ${riskLevel.toUpperCase()} RISK`}
-            </p>
+          <div className="space-y-2 flex-1">
+            <div className="flex items-center justify-between">
+              <p className={`text-[10px] font-black uppercase tracking-[0.2em] ${
+                status === 'scanning' ? 'text-white/40' :
+                status === 'safe' ? 'text-emerald-400' :
+                'text-rose-400'
+              }`}>
+                {status === 'scanning' ? 'AI SAFETY SCAN IN PROGRESS' :
+                 status === 'safe' ? 'CONTENT VERIFIED SAFE' :
+                 `SAFETY WARNING: ${riskLevel.toUpperCase()} RISK`}
+              </p>
+              {status === 'scanning' && (
+                <div className="flex gap-1">
+                  <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1 h-1 rounded-full bg-white/40" />
+                  <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1 h-1 rounded-full bg-white/40" />
+                  <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1 h-1 rounded-full bg-white/40" />
+                </div>
+              )}
+            </div>
             {reason && (
-              <p className="text-[11px] text-zinc-400 leading-tight">
+              <p className="text-sm text-white/60 leading-relaxed font-medium">
                 {reason}
               </p>
             )}
             {status === 'unsafe' && (
-              <div className="flex items-center gap-1.5 mt-1">
-                <Info className="w-3 h-3 text-rose-400" />
-                <p className="text-[10px] text-rose-400 font-medium">
-                  Please revise your content to comply with Boardly safety guidelines.
+              <div className="flex items-center gap-2 pt-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" />
+                <p className="text-[11px] text-rose-400 font-black uppercase tracking-wider">
+                  Action Required: Please revise your content
                 </p>
               </div>
             )}
