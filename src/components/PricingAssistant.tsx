@@ -114,17 +114,17 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
   const feedback = getFeedback();
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div className="space-y-2">
-          <h3 className="text-4xl font-heading font-black flex items-center gap-4 tracking-tighter text-white">
-            <Sparkles className="w-10 h-10 text-primary animate-pulse" />
+        <div className="space-y-1">
+          <h3 className="text-2xl font-heading font-black flex items-center gap-3 tracking-tighter text-white">
+            <Sparkles className="w-7 h-7 text-primary animate-pulse" />
             AI Pricing Engine
           </h3>
-          <p className="text-white/40 font-black text-[11px] uppercase tracking-[0.3em]">Real-time market analysis for maximum yield</p>
+          <p className="text-white/40 font-black text-[9px] uppercase tracking-[0.3em]">Real-time market analysis for maximum yield</p>
         </div>
-        <div className="flex items-center gap-4">
-          <Badge className="rounded-full bg-primary/10 text-primary border-primary/20 px-6 py-2 font-black text-[11px] uppercase tracking-[0.3em] glow-primary">
+        <div className="flex items-center gap-3">
+          <Badge className="rounded-full bg-primary/10 text-primary border-primary/20 px-4 py-1 font-black text-[9px] uppercase tracking-[0.3em] glow-primary">
             Live Analysis
           </Badge>
           <InfoTooltip 
@@ -134,13 +134,13 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="h-40 bg-white/5 animate-pulse rounded-[2rem] border border-white/5 shadow-2xl"></div>
+            <div key={i} className="h-32 bg-white/5 animate-pulse rounded-2xl border border-white/5 shadow-2xl"></div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <PricingCard 
             title="Safe Start" 
             price={suggestions?.safe || 0} 
@@ -180,69 +180,69 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <Card className="fintech-card rounded-[3rem] border-white/10 bg-[#0f172a]/40 backdrop-blur-3xl shadow-2xl">
-          <CardHeader className="p-10 pb-4">
-            <CardTitle className="text-xl font-black font-heading flex items-center gap-3 tracking-tight">
-              <BarChart3 className="w-6 h-6 text-primary" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="fintech-card rounded-2xl border-white/10 bg-[#0f172a]/40 backdrop-blur-3xl shadow-2xl">
+          <CardHeader className="p-6 pb-3">
+            <CardTitle className="text-lg font-black font-heading flex items-center gap-2 tracking-tight">
+              <BarChart3 className="w-5 h-5 text-primary" />
               Earnings Projection
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-10 pt-0 space-y-10">
-            <div className="grid grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <Label className="text-[10px] text-muted-foreground uppercase tracking-[0.3em] font-black">Lives per week</Label>
-                <div className="flex items-center gap-6 bg-white/5 p-2 rounded-2xl border border-white/5">
+          <CardContent className="p-6 pt-0 space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="text-[9px] text-muted-foreground uppercase tracking-[0.3em] font-black">Lives per week</Label>
+                <div className="flex items-center gap-4 bg-white/5 p-1.5 rounded-xl border border-white/5">
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="h-10 w-10 rounded-xl hover:bg-white/10 text-white"
+                    className="h-8 w-8 rounded-lg hover:bg-white/10 text-white"
                     onClick={() => setFrequency(Math.max(1, frequency - 1))}
                   >-</Button>
-                  <span className="font-black text-xl text-white min-w-[1.5rem] text-center">{frequency}</span>
+                  <span className="font-black text-base text-white min-w-[1.25rem] text-center">{frequency}</span>
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="h-10 w-10 rounded-xl hover:bg-white/10 text-white"
+                    className="h-8 w-8 rounded-lg hover:bg-white/10 text-white"
                     onClick={() => setFrequency(frequency + 1)}
                   >+</Button>
                 </div>
               </div>
-              <div className="space-y-4">
-                <Label className="text-[10px] text-muted-foreground uppercase tracking-[0.3em] font-black">Slots per live</Label>
-                <div className="flex items-center gap-6 bg-white/5 p-2 rounded-2xl border border-white/5">
+              <div className="space-y-2">
+                <Label className="text-[9px] text-muted-foreground uppercase tracking-[0.3em] font-black">Slots per live</Label>
+                <div className="flex items-center gap-4 bg-white/5 p-1.5 rounded-xl border border-white/5">
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="h-10 w-10 rounded-xl hover:bg-white/10 text-white"
+                    className="h-8 w-8 rounded-lg hover:bg-white/10 text-white"
                     onClick={() => setSlotsPerLive(Math.max(1, slotsPerLive - 1))}
                   >-</Button>
-                  <span className="font-black text-xl text-white min-w-[1.5rem] text-center">{slotsPerLive}</span>
+                  <span className="font-black text-base text-white min-w-[1.25rem] text-center">{slotsPerLive}</span>
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="h-10 w-10 rounded-xl hover:bg-white/10 text-white"
+                    className="h-8 w-8 rounded-lg hover:bg-white/10 text-white"
                     onClick={() => setSlotsPerLive(slotsPerLive + 1)}
                   >+</Button>
                 </div>
               </div>
             </div>
 
-            <div className="h-64 w-full mt-6">
+            <div className="h-48 w-full mt-4">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={projectionData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                   <XAxis 
                     dataKey="name" 
                     stroke="rgba(255,255,255,0.3)" 
-                    fontSize={10} 
+                    fontSize={9} 
                     tickLine={false} 
                     axisLine={false}
                     tick={{ fontWeight: 800, style: { textTransform: 'uppercase', letterSpacing: '0.1em' } }}
                   />
                   <YAxis 
                     stroke="rgba(255,255,255,0.3)" 
-                    fontSize={10} 
+                    fontSize={9} 
                     tickLine={false} 
                     axisLine={false} 
                     tickFormatter={(value) => `$${value}`}
@@ -250,11 +250,11 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
                   />
                   <RechartsTooltip 
                     cursor={{ fill: 'rgba(255,255,255,0.05)' }}
-                    contentStyle={{ backgroundColor: '#020617', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '1.5rem', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}
-                    itemStyle={{ color: '#fff', fontWeight: 800 }}
-                    labelStyle={{ color: 'rgba(255,255,255,0.5)', fontWeight: 800, textTransform: 'uppercase', fontSize: '10px', marginBottom: '4px' }}
+                    contentStyle={{ backgroundColor: '#020617', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '1rem', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}
+                    itemStyle={{ color: '#fff', fontWeight: 800, fontSize: '12px' }}
+                    labelStyle={{ color: 'rgba(255,255,255,0.5)', fontWeight: 800, textTransform: 'uppercase', fontSize: '9px', marginBottom: '4px' }}
                   />
-                  <Bar dataKey="amount" radius={[8, 8, 0, 0]}>
+                  <Bar dataKey="amount" radius={[6, 6, 0, 0]}>
                     {projectionData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={index === 1 ? '#3b82f6' : 'rgba(255,255,255,0.1)'} />
                     ))}
@@ -263,30 +263,30 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
               </ResponsiveContainer>
             </div>
 
-            <div className="bg-primary/10 border border-primary/20 rounded-[2rem] p-8 flex items-center justify-between shadow-2xl shadow-primary/10">
+            <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-center justify-between shadow-2xl shadow-primary/10">
               <div>
-                <p className="text-[10px] text-primary font-black uppercase tracking-[0.3em] mb-2">Estimated Monthly Revenue</p>
-                <p className="text-4xl font-black text-white tracking-tighter">${projectionData[1].amount.toLocaleString()}</p>
+                <p className="text-[9px] text-primary font-black uppercase tracking-[0.3em] mb-1">Estimated Monthly Revenue</p>
+                <p className="text-2xl font-black text-white tracking-tighter">${projectionData[1].amount.toLocaleString()}</p>
               </div>
-              <div className="bg-primary/20 p-4 rounded-2xl shadow-inner border border-primary/20">
-                <ArrowUpRight className="w-8 h-8 text-primary" />
+              <div className="bg-primary/20 p-2.5 rounded-xl shadow-inner border border-primary/20">
+                <ArrowUpRight className="w-5 h-5 text-primary" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="fintech-card rounded-[3rem] border-white/10 bg-[#0f172a]/40 backdrop-blur-3xl shadow-2xl">
-          <CardHeader className="p-10 pb-4">
-            <CardTitle className="text-xl font-black font-heading flex items-center gap-3 tracking-tight">
-              <DollarSign className="w-6 h-6 text-primary" />
+        <Card className="fintech-card rounded-2xl border-white/10 bg-[#0f172a]/40 backdrop-blur-3xl shadow-2xl">
+          <CardHeader className="p-6 pb-3">
+            <CardTitle className="text-lg font-black font-heading flex items-center gap-2 tracking-tight">
+              <DollarSign className="w-5 h-5 text-primary" />
               Set Your Price
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-10 pt-0 space-y-10">
-            <div className="space-y-8">
+          <CardContent className="p-6 pt-0 space-y-6">
+            <div className="space-y-6">
               <div className="relative group">
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 text-primary" />
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <DollarSign className="w-3.5 h-3.5 text-primary" />
                 </div>
                 <Input 
                   type="number" 
@@ -296,7 +296,7 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
                     setCustomPrice(val);
                     onPriceSelect(val);
                   }}
-                  className="pl-18 h-20 text-3xl font-black bg-white/5 border-white/10 focus-visible:ring-primary/50 rounded-[1.5rem] tracking-tighter shadow-inner"
+                  className="pl-14 h-12 text-xl font-black bg-white/5 border-white/10 focus-visible:ring-primary/50 rounded-xl tracking-tighter shadow-inner"
                   placeholder="0.00"
                 />
               </div>
@@ -307,23 +307,23 @@ export function PricingAssistant({ stats, onPriceSelect, currentPrice }: Pricing
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className={`p-8 rounded-[2rem] border flex gap-6 shadow-2xl ${feedback.bg} ${feedback.border}`}
+                    className={`p-4 rounded-2xl border flex gap-4 shadow-2xl ${feedback.bg} ${feedback.border}`}
                   >
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-inner bg-white/5 ${feedback.color}`}>
-                      <feedback.icon className="w-6 h-6" />
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-inner bg-white/5 ${feedback.color}`}>
+                      <feedback.icon className="w-5 h-5" />
                     </div>
-                    <p className="text-sm text-white/70 leading-relaxed font-medium">{feedback.message}</p>
+                    <p className="text-[13px] text-white/70 leading-relaxed font-medium">{feedback.message}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              <div className="space-y-6">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">AI Insights & Strategy</p>
-                <ul className="space-y-4">
+              <div className="space-y-4">
+                <p className="text-[9px] font-black text-white/40 uppercase tracking-[0.3em]">AI Insights & Strategy</p>
+                <ul className="space-y-3">
                   {suggestions?.tips?.map((tip: string, i: number) => (
-                    <li key={i} className="text-sm text-white/60 flex gap-4 group">
-                      <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
-                        <ChevronRight className="w-4 h-4 text-primary" />
+                    <li key={i} className="text-[13px] text-white/60 flex gap-3 group">
+                      <div className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
+                        <ChevronRight className="w-3.5 h-3.5 text-primary" />
                       </div>
                       <span className="font-medium leading-relaxed">{tip}</span>
                     </li>
@@ -349,23 +349,23 @@ function PricingCard({ title, price, description, icon: Icon, color, onClick, ac
   return (
     <button 
       onClick={onClick}
-      className={`p-10 rounded-[3rem] border text-left transition-all duration-700 hover:scale-[1.02] active:scale-[0.98] shadow-2xl relative overflow-hidden group ${
+      className={`p-5 rounded-2xl border text-left transition-all duration-700 hover:scale-[1.02] active:scale-[0.98] shadow-2xl relative overflow-hidden group ${
         active 
-          ? `${colorClasses[color as keyof typeof colorClasses]} border-current ring-4 ring-current/10` 
+          ? `${colorClasses[color as keyof typeof colorClasses]} border-current ring-2 ring-current/10` 
           : 'bg-[#0f172a]/40 border-white/10 text-white/40 hover:border-white/20 backdrop-blur-3xl'
       }`}
     >
-      <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity group-hover:scale-125 duration-700">
-        <Icon className="w-24 h-24" />
+      <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity group-hover:scale-125 duration-700">
+        <Icon className="w-16 h-16" />
       </div>
-      <div className="flex items-center justify-between mb-8 relative z-10">
-        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner transition-colors duration-500 ${active ? 'bg-white/20' : 'bg-white/5 group-hover:bg-white/10'}`}>
-          <Icon className="w-6 h-6" />
+      <div className="flex items-center justify-between mb-4 relative z-10">
+        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shadow-inner transition-colors duration-500 ${active ? 'bg-white/20' : 'bg-white/5 group-hover:bg-white/10'}`}>
+          <Icon className="w-5 h-5" />
         </div>
-        <span className="text-[11px] font-black uppercase tracking-[0.3em] opacity-60">{title}</span>
+        <span className="text-[9px] font-black uppercase tracking-[0.3em] opacity-60">{title}</span>
       </div>
-      <div className="text-5xl font-heading font-black text-white mb-3 tracking-tighter relative z-10">${price}</div>
-      <p className="text-[11px] leading-tight font-black uppercase tracking-[0.4em] opacity-40 relative z-10">{description}</p>
+      <div className="text-2xl font-heading font-black text-white mb-1 tracking-tighter relative z-10">${price}</div>
+      <p className="text-[9px] leading-tight font-black uppercase tracking-[0.4em] opacity-40 relative z-10">{description}</p>
     </button>
   );
 }

@@ -68,6 +68,16 @@ service cloud.firestore {
              data.status in ['pending', 'accepted', 'declined', 'active', 'proof_submitted', 'completed', 'disputed', 'refunded'];
     }
 
+    function isValidSafetyLog(data) {
+      return data.keys().hasAll(['userId', 'content', 'contentType', 'isSafe', 'riskLevel', 'reason', 'createdAt']) &&
+             data.userId is string && data.userId.size() > 0 &&
+             data.content is string && data.content.size() < 5000 &&
+             data.contentType in ['text', 'link'] &&
+             data.isSafe is bool &&
+             data.riskLevel is string &&
+             data.reason is string;
+    }
+
     // ===============================================================
     // Rules
     // ===============================================================
@@ -135,6 +145,12 @@ service cloud.firestore {
     match /discovery_interactions/{interactionId} {
       allow read: if isAdmin();
       allow create: if isAuthenticated() && request.auth.uid == request.resource.data.userId && isValidDiscoveryInteraction(request.resource.data);
+      allow update, delete: if isAdmin();
+    }
+
+    match /safety_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated() && request.auth.uid == request.resource.data.userId && isValidSafetyLog(request.resource.data);
       allow update, delete: if isAdmin();
     }
   }

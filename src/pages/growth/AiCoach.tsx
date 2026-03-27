@@ -25,9 +25,10 @@ export default function AiCoach() {
     setLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
+      const apiKey = (process.env.API_KEY || process.env.GEMINI_API_KEY) as string;
+      const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-flash-latest',
         contents: `You are an expert TikTok growth coach helping a creator reach 10,000 followers. 
         Creator niche: ${profile?.niche || 'unknown'}. 
         Current followers: ${profile?.followerCount || 0}.
@@ -47,59 +48,59 @@ export default function AiCoach() {
   return (
     <DashboardLayout>
       <div className="max-w-4xl mx-auto h-[calc(100vh-8rem)] flex flex-col">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold tracking-tight flex items-center gap-3">
-            <Sparkles className="w-8 h-8 text-blue-400" />
+        <div className="mb-4">
+          <h1 className="text-xl font-bold tracking-tight flex items-center gap-2">
+            <Sparkles className="w-6 h-6 text-blue-400" />
             AI Growth Coach
           </h1>
-          <p className="text-zinc-400 mt-1">Your personalized roadmap to 10k followers.</p>
+          <p className="text-zinc-400 mt-0.5 text-xs">Your personalized roadmap to 10k followers.</p>
         </div>
 
-        <Card className="flex-1 bg-zinc-900 border-zinc-800 flex flex-col overflow-hidden">
-          <CardContent className="flex-1 p-6 overflow-y-auto space-y-6">
+        <Card className="flex-1 bg-zinc-900 border-zinc-800 flex flex-col overflow-hidden rounded-xl">
+          <CardContent className="flex-1 p-4 overflow-y-auto space-y-4">
             {messages.map((msg, i) => (
-              <div key={i} className={`flex gap-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 border border-blue-800">
-                    <Bot className="w-4 h-4 text-blue-400" />
+                  <div className="w-6 h-6 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 border border-blue-800">
+                    <Bot className="w-3 h-3 text-blue-400" />
                   </div>
                 )}
-                <div className={`max-w-[80%] rounded-2xl p-4 ${
+                <div className={`max-w-[85%] rounded-xl p-3 ${
                   msg.role === 'user' 
                     ? 'bg-zinc-50 text-zinc-950 rounded-tr-sm' 
                     : 'bg-zinc-800 text-zinc-100 rounded-tl-sm border border-zinc-700'
                 }`}>
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                  <p className="text-xs leading-relaxed whitespace-pre-wrap">{msg.content}</p>
                 </div>
               </div>
             ))}
             {loading && (
-              <div className="flex gap-4 justify-start">
-                <div className="w-8 h-8 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 border border-blue-800">
-                  <Bot className="w-4 h-4 text-blue-400" />
+              <div className="flex gap-3 justify-start">
+                <div className="w-6 h-6 rounded-full bg-blue-900/50 flex items-center justify-center shrink-0 border border-blue-800">
+                  <Bot className="w-3 h-3 text-blue-400" />
                 </div>
-                <div className="bg-zinc-800 rounded-2xl rounded-tl-sm p-4 border border-zinc-700 flex items-center gap-1">
-                  <div className="w-2 h-2 bg-zinc-500 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-2 h-2 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                <div className="bg-zinc-800 rounded-xl rounded-tl-sm p-3 border border-zinc-700 flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce"></div>
+                  <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
                 </div>
               </div>
             )}
           </CardContent>
-          <div className="p-4 bg-zinc-950 border-t border-zinc-800">
+          <div className="p-3 bg-zinc-950 border-t border-zinc-800">
             <form onSubmit={handleSend} className="flex gap-2">
               <Input 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask for content ideas, hook strategies, or schedule tips..."
-                className="bg-zinc-900 border-zinc-800 focus-visible:ring-zinc-700"
+                className="bg-zinc-900 border-zinc-800 focus-visible:ring-zinc-700 h-9 text-xs"
                 disabled={loading}
               />
-              <Button type="submit" disabled={loading || !input.trim()} className="bg-blue-600 hover:bg-blue-700 text-white px-6">
-                <Send className="w-4 h-4" />
+              <Button type="submit" disabled={loading || !input.trim()} className="bg-blue-600 hover:bg-blue-700 text-white px-4 h-9">
+                <Send className="w-3.5 h-3.5" />
               </Button>
             </form>
-            <p className="text-xs text-center text-zinc-500 mt-3">
+            <p className="text-[10px] text-center text-zinc-500 mt-2">
               Uses 1 AI Coin per message. You have {profile?.coinBalance || 0} coins remaining.
             </p>
           </div>

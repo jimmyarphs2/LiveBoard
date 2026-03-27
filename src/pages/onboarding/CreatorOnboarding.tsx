@@ -162,32 +162,32 @@ export default function CreatorOnboarding() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`w-full ${step === 3 ? 'max-w-5xl' : 'max-w-2xl'} relative z-10`}
+        className={`w-full ${step === 3 ? 'max-w-4xl' : 'max-w-xl'} relative z-10`}
       >
-        <div className="bg-[#0f172a]/40 border border-white/10 backdrop-blur-3xl rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden">
+        <div className="bg-[#0f172a]/40 border border-white/10 backdrop-blur-3xl rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
           
-          <div className="mb-12">
-            <div className="flex items-center justify-between mb-10">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20">
-                  <Sparkles className="text-primary w-7 h-7 glow-primary" />
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+                  <Sparkles className="text-primary w-5 h-5 glow-primary" />
                 </div>
                 <div>
-                  <h1 className="text-4xl font-black text-white tracking-tighter font-heading">
+                  <h1 className="text-2xl font-black text-white tracking-tighter font-heading">
                     {step === 3 ? 'SMART PRICING' : 'CREATOR PROFILE'}
                   </h1>
-                  <p className="text-white/40 text-lg font-medium tracking-tight">
+                  <p className="text-white/40 text-sm font-medium tracking-tight">
                     {step === 3 ? 'Set your rates with AI-powered suggestions.' : "Let's set up your monetization space."}
                   </p>
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 {[1, 2, 3].map((s) => (
                   <div 
                     key={s} 
-                    className={`h-2 w-10 rounded-full transition-all duration-700 ${
-                      step === s ? 'bg-primary w-16 shadow-[0_0_15px_rgba(59,130,246,0.5)]' : step > s ? 'bg-primary/40' : 'bg-white/10'
+                    className={`h-1.5 w-8 rounded-full transition-all duration-700 ${
+                      step === s ? 'bg-primary w-12 shadow-[0_0_15px_rgba(59,130,246,0.5)]' : step > s ? 'bg-primary/40' : 'bg-white/10'
                     }`} 
                   />
                 ))}
@@ -195,7 +195,7 @@ export default function CreatorOnboarding() {
             </div>
           </div>
 
-          <div className="space-y-10">
+          <div className="space-y-6">
             <AnimatePresence mode="wait">
               {step === 1 && (
                 <motion.div 
@@ -203,11 +203,11 @@ export default function CreatorOnboarding() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
-                  className="space-y-8"
+                  className="space-y-6"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="tiktokHandle" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">TikTok Handle</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="tiktokHandle" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">TikTok Handle</Label>
                       <InfoTooltip 
                         content="Your public TikTok username starting with @" 
                         example="@creator_name"
@@ -215,20 +215,20 @@ export default function CreatorOnboarding() {
                       />
                     </div>
                     <div className="relative group">
-                      <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
                       <Input 
                         id="tiktokHandle" 
                         placeholder="@username" 
                         value={formData.tiktokHandle}
                         onChange={(e) => setFormData({...formData, tiktokHandle: e.target.value})}
                         required
-                        className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                        className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                       />
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="followerCount" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Follower Count</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="followerCount" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Follower Count</Label>
                       <InfoTooltip 
                         content="Your current total follower count on TikTok." 
                         example="15,400"
@@ -236,7 +236,7 @@ export default function CreatorOnboarding() {
                       />
                     </div>
                     <div className="relative group">
-                      <Users className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
+                      <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
                       <Input 
                         id="followerCount" 
                         type="number"
@@ -244,25 +244,25 @@ export default function CreatorOnboarding() {
                         value={formData.followerCount}
                         onChange={(e) => setFormData({...formData, followerCount: e.target.value})}
                         required
-                        className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                        className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                       />
                     </div>
-                    <div className="flex items-center gap-4 px-1 pt-2">
-                      <div className="h-2 flex-1 bg-white/5 rounded-full overflow-hidden">
+                    <div className="flex items-center gap-3 px-1 pt-1">
+                      <div className="h-1.5 flex-1 bg-white/5 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: `${Math.min((parseInt(formData.followerCount) || 0) / minFollowers * 100, 100)}%` }}
                           className="h-full bg-primary shadow-[0_0_15px_rgba(59,130,246,0.5)]"
                         />
                       </div>
-                      <p className="text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">
+                      <p className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">
                         {minFollowers.toLocaleString()} REQUIRED
                       </p>
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="niche" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Content Niche</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="niche" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Content Niche</Label>
                       <InfoTooltip 
                         content="The primary category of your content." 
                         example="Gaming / Lifestyle"
@@ -270,9 +270,9 @@ export default function CreatorOnboarding() {
                       />
                     </div>
                     <div className="relative group">
-                      <Target className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors z-10" />
+                      <Target className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors z-10" />
                       <Select value={formData.niche} onValueChange={(v) => setFormData({...formData, niche: v})}>
-                        <SelectTrigger className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium">
+                        <SelectTrigger className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium">
                           <SelectValue placeholder="Select your primary niche" />
                         </SelectTrigger>
                         <SelectContent className="bg-[#0f172a] border-white/10 text-white backdrop-blur-3xl">
@@ -288,9 +288,9 @@ export default function CreatorOnboarding() {
                       </Select>
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="username" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Boardly Username</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="username" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Boardly Username</Label>
                       <InfoTooltip 
                         content="Your unique Boardly profile URL." 
                         example="boardly.com/c/yourname"
@@ -298,24 +298,24 @@ export default function CreatorOnboarding() {
                       />
                     </div>
                     <div className="relative group">
-                      <span className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 text-sm font-black uppercase tracking-widest">boardly.com/c/</span>
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 text-[10px] font-black uppercase tracking-widest">boardly.com/c/</span>
                       <Input 
                         id="username" 
                         placeholder="username" 
                         value={formData.username}
                         onChange={(e) => setFormData({...formData, username: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '')})}
                         required
-                        className="bg-white/5 border-white/10 text-white pl-[145px] h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                        className="bg-white/5 border-white/10 text-white pl-[105px] h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                       />
                     </div>
                   </div>
                   <Button 
                     onClick={handleNext} 
-                    className="w-full mt-10 bg-primary hover:bg-primary/90 h-20 rounded-2xl font-black text-xl uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden"
+                    className="w-full mt-6 bg-primary hover:bg-primary/90 h-14 rounded-xl font-black text-base uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                     Continue
-                    <ArrowRight className="w-6 h-6 ml-4 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
                   </Button>
                 </motion.div>
               )}
@@ -326,11 +326,11 @@ export default function CreatorOnboarding() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="space-y-8"
+                  className="space-y-6"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="avgViewers" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Average Live Viewers</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="avgViewers" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Average Live Viewers</Label>
                       <InfoTooltip 
                         content="The typical number of concurrent viewers during your live sessions." 
                         example="450"
@@ -338,7 +338,7 @@ export default function CreatorOnboarding() {
                       />
                     </div>
                     <div className="relative group">
-                      <Users className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
+                      <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
                       <Input 
                         id="avgViewers" 
                         type="number"
@@ -346,13 +346,13 @@ export default function CreatorOnboarding() {
                         value={formData.avgViewers}
                         onChange={(e) => setFormData({...formData, avgViewers: e.target.value})}
                         required
-                        className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                        className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                       />
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="country" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Country</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="country" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Country</Label>
                       <InfoTooltip 
                         content="Your primary location or audience base." 
                         example="United Kingdom"
@@ -360,20 +360,20 @@ export default function CreatorOnboarding() {
                       />
                     </div>
                     <div className="relative group">
-                      <Globe className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
+                      <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
                       <Input 
                         id="country" 
                         placeholder="e.g. United States" 
                         value={formData.country}
                         onChange={(e) => setFormData({...formData, country: e.target.value})}
                         required
-                        className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                        className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                       />
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 ml-1">
-                      <Label htmlFor="bio" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Creator Bio</Label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 ml-1">
+                      <Label htmlFor="bio" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Creator Bio</Label>
                       <InfoTooltip 
                         content="A short pitch about your channel and audience." 
                         example="I stream daily high-energy gaming sessions with a focus on RPGs."
@@ -385,25 +385,25 @@ export default function CreatorOnboarding() {
                       placeholder="Tell advertisers about your audience and vibe..." 
                       value={formData.bio}
                       onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                      className="bg-white/5 border-white/10 text-white min-h-[160px] rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all resize-none p-6 text-lg font-medium"
+                      className="bg-white/5 border-white/10 text-white min-h-[120px] rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all resize-none p-4 text-base font-medium"
                     />
                   </div>
-                  <div className="flex gap-6 mt-10">
+                  <div className="flex gap-4 mt-6">
                     <Button 
                       variant="outline" 
                       onClick={handleBack} 
-                      className="flex-1 h-20 rounded-2xl bg-white/5 border-white/10 hover:bg-white/10 text-white font-black uppercase tracking-widest text-sm transition-all"
+                      className="flex-1 h-14 rounded-xl bg-white/5 border-white/10 hover:bg-white/10 text-white font-black uppercase tracking-widest text-xs transition-all"
                     >
-                      <ArrowLeft className="w-5 h-5 mr-3" />
+                      <ArrowLeft className="w-4 h-4 mr-2" />
                       Back
                     </Button>
                     <Button 
                       onClick={handleNext} 
-                      className="flex-[2] h-20 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black text-xl uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden"
+                      className="flex-[2] h-14 rounded-xl bg-primary hover:bg-primary/90 text-white font-black text-base uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                      Continue to Pricing
-                      <ArrowRight className="w-6 h-6 ml-4 group-hover:translate-x-2 transition-transform" />
+                      Continue
+                      <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
                     </Button>
                   </div>
                 </motion.div>
@@ -415,9 +415,9 @@ export default function CreatorOnboarding() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="space-y-10"
+                  className="space-y-8"
                 >
-                  <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-10 backdrop-blur-2xl shadow-inner">
+                  <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-2xl shadow-inner">
                     <PricingAssistant 
                       stats={{
                         followerCount: parseInt(formData.followerCount),
@@ -430,30 +430,30 @@ export default function CreatorOnboarding() {
                     />
                   </div>
                   
-                  <div className="flex gap-6 mt-12">
+                  <div className="flex gap-4 mt-8">
                     <Button 
                       variant="outline" 
                       onClick={handleBack} 
-                      className="flex-1 h-20 rounded-2xl bg-white/5 border-white/10 hover:bg-white/10 text-white font-black uppercase tracking-widest text-sm transition-all"
+                      className="flex-1 h-14 rounded-xl bg-white/5 border-white/10 hover:bg-white/10 text-white font-black uppercase tracking-widest text-xs transition-all"
                     >
-                      <ArrowLeft className="w-5 h-5 mr-3" />
+                      <ArrowLeft className="w-4 h-4 mr-2" />
                       Back
                     </Button>
                     <Button 
                       onClick={handleSubmit} 
-                      className="flex-[2] h-20 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black text-xl uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden" 
+                      className="flex-[2] h-14 rounded-xl bg-primary hover:bg-primary/90 text-white font-black text-base uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden" 
                       disabled={loading}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                       {loading ? (
-                        <div className="flex items-center gap-3">
-                          <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                        <div className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                           Saving...
                         </div>
                       ) : (
                         <>
                           Complete Profile
-                          <CheckCircle2 className="w-6 h-6 ml-4" />
+                          <CheckCircle2 className="w-5 h-5 ml-3" />
                         </>
                       )}
                     </Button>

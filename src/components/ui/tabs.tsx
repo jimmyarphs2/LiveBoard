@@ -8,12 +8,18 @@ import { cn } from "@/lib/utils"
 function Tabs({
   className,
   orientation = "horizontal",
+  value,
+  onValueChange,
+  defaultValue,
   ...props
 }: TabsPrimitive.Root.Props) {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
       data-orientation={orientation}
+      value={value}
+      onValueChange={onValueChange}
+      defaultValue={value === undefined ? defaultValue : undefined}
       className={cn(
         "group/tabs flex gap-2 data-horizontal:flex-col",
         className

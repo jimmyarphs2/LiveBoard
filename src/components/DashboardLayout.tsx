@@ -39,18 +39,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none animate-pulse-glow [animation-delay:1s] z-0" />
 
       {/* Sidebar - Desktop */}
-      <aside className="w-80 border-r border-white/5 bg-[#020617]/80 backdrop-blur-3xl flex flex-col hidden lg:flex relative z-20">
-        <div className="h-24 flex items-center px-10 border-b border-white/5">
-          <Link to="/" className="flex items-center gap-4 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary via-primary to-purple-600 rounded-[1rem] flex items-center justify-center shadow-2xl shadow-primary/40 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6">
-              <span className="text-white font-black text-3xl font-heading">B</span>
+      <aside className="w-64 border-r border-white/5 bg-[#020617]/80 backdrop-blur-3xl flex flex-col hidden lg:flex relative z-20">
+        <div className="h-16 flex items-center px-6 border-b border-white/5">
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-8 h-8 bg-gradient-to-br from-primary via-primary to-purple-600 rounded-lg flex items-center justify-center shadow-xl shadow-primary/40 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6">
+              <span className="text-white font-black text-xl font-heading">B</span>
             </div>
-            <span className="font-black text-3xl tracking-tighter font-heading bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/40">Boardly</span>
+            <span className="font-black text-xl tracking-tighter font-heading bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/40">Boardly</span>
           </Link>
         </div>
         
-        <div className="flex-1 py-10 px-6 space-y-3 overflow-y-auto custom-scrollbar">
-          <p className="px-4 text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-6">Main Terminal</p>
+        <div className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto custom-scrollbar">
+          <p className="px-3 text-[9px] font-black uppercase tracking-[0.3em] text-white/30 mb-4">Main Terminal</p>
           {navItems.filter(item => item.show).map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.href;
@@ -59,7 +59,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "flex items-center gap-4 px-5 py-4 rounded-[1.5rem] text-sm font-black transition-all duration-500 group relative overflow-hidden uppercase tracking-widest",
+                  "flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-black transition-all duration-500 group relative overflow-hidden uppercase tracking-widest",
                   isActive 
                     ? "bg-primary/10 text-primary glow-primary shadow-lg shadow-primary/5" 
                     : "text-white/50 hover:text-white hover:bg-white/5"
@@ -68,40 +68,40 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 {isActive && (
                   <motion.div 
                     layoutId="activeNav"
-                    className="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-primary rounded-full glow-primary"
+                    className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-primary rounded-full glow-primary"
                   />
                 )}
                 <div className={cn(
-                  "p-2.5 rounded-xl transition-all duration-500",
+                  "p-1.5 rounded-lg transition-all duration-500",
                   isActive ? "bg-primary/20 scale-110 shadow-lg shadow-primary/20" : "bg-white/5 group-hover:bg-white/10 group-hover:scale-110"
                 )}>
-                  <Icon className={cn("w-5 h-5", isActive && "fill-current")} />
+                  <Icon className={cn("w-4 h-4", isActive && "fill-current")} />
                 </div>
                 <span className="flex-1">{item.name}</span>
-                {isActive && <ChevronRight className="w-4 h-4 opacity-50" />}
+                {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-50" />}
               </Link>
             );
           })}
         </div>
 
-        <div className="p-8 border-t border-white/5 bg-black/20 backdrop-blur-3xl">
-          <div className="p-5 rounded-[2rem] mb-6 flex items-center gap-4 border border-white/5 bg-white/5 hover:bg-white/10 transition-all cursor-pointer group shadow-2xl">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center border border-white/10 shadow-inner group-hover:scale-110 transition-transform">
-              <User className="w-6 h-6 text-white/40 group-hover:text-primary transition-colors" />
+        <div className="p-6 border-t border-white/5 bg-black/20 backdrop-blur-3xl">
+          <div className="p-3 rounded-2xl mb-4 flex items-center gap-3 border border-white/5 bg-white/5 hover:bg-white/10 transition-all cursor-pointer group shadow-xl">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center border border-white/10 shadow-inner group-hover:scale-110 transition-transform">
+              <User className="w-4 h-4 text-white/40 group-hover:text-primary transition-colors" />
             </div>
             <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-black truncate text-white tracking-tight">
+              <p className="text-[13px] font-black truncate text-white tracking-tight">
                 {profile?.brandName || profile?.tiktokHandle || 'User'}
               </p>
-              <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em] mt-0.5">{role}</p>
+              <p className="text-[9px] text-primary font-black uppercase tracking-[0.2em] mt-0.5">{role}</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-4 px-5 py-4 rounded-[1.5rem] text-sm font-black text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-all duration-500 group uppercase tracking-widest"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-black text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-all duration-500 group uppercase tracking-widest"
           >
-            <div className="p-2.5 rounded-xl bg-red-500/5 group-hover:bg-red-500/10 transition-all group-hover:scale-110">
-              <LogOut className="w-5 h-5" />
+            <div className="p-1.5 rounded-lg bg-red-500/5 group-hover:bg-red-500/10 transition-all group-hover:scale-110">
+              <LogOut className="w-4 h-4" />
             </div>
             Log out
           </button>
@@ -111,51 +111,51 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-h-screen relative z-10">
         {/* Header */}
-        <header className="h-24 sticky top-0 z-30 border-b border-white/5 bg-[#020617]/60 backdrop-blur-3xl flex items-center justify-between px-8 lg:px-12">
-          <div className="flex items-center gap-6 lg:hidden">
+        <header className="h-16 sticky top-0 z-30 border-b border-white/5 bg-[#020617]/60 backdrop-blur-3xl flex items-center justify-between px-6 lg:px-8">
+          <div className="flex items-center gap-4 lg:hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-3 rounded-2xl bg-white/5 text-white hover:bg-white/10 transition-colors"
+              className="p-2 rounded-xl bg-white/5 text-white hover:bg-white/10 transition-colors"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white font-black text-xl font-heading">B</span>
+            <Link to="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+                <span className="text-white font-black text-lg font-heading">B</span>
               </div>
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-6 flex-1 max-w-xl">
+          <div className="hidden md:flex items-center gap-4 flex-1 max-w-md">
             <div className="relative w-full group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-primary transition-all duration-500" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-primary transition-all duration-500" />
               <input 
                 type="text" 
                 placeholder="Search global marketplace..." 
-                className="w-full bg-white/5 border border-white/10 rounded-[1.5rem] py-4 pl-14 pr-6 text-base font-medium text-white focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all duration-500 placeholder:text-white/20 shadow-inner"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm font-medium text-white focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all duration-500 placeholder:text-white/20 shadow-inner"
               />
-              <div className="absolute right-5 top-1/2 -translate-y-1/2 px-2 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-black text-white/30 uppercase tracking-widest hidden lg:block">
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-black text-white/30 uppercase tracking-widest hidden lg:block">
                 ⌘ K
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 lg:gap-8">
-            <button className="p-3.5 rounded-2xl bg-white/5 text-white/40 hover:text-white hover:bg-white/10 transition-all relative group shadow-xl">
-              <Bell className="w-6 h-6" />
-              <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full glow-primary animate-pulse border-2 border-[#020617]" />
+          <div className="flex items-center gap-4 lg:gap-6">
+            <button className="p-2.5 rounded-xl bg-white/5 text-white/40 hover:text-white hover:bg-white/10 transition-all relative group shadow-xl">
+              <Bell className="w-5 h-5" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full glow-primary animate-pulse border-2 border-[#020617]" />
             </button>
-            <div className="h-10 w-px bg-white/10 hidden sm:block" />
-            <div className="flex items-center gap-5 pl-2 group cursor-pointer">
+            <div className="h-8 w-px bg-white/10 hidden sm:block" />
+            <div className="flex items-center gap-4 pl-1 group cursor-pointer">
               <div className="text-right hidden sm:block">
-                <p className="text-lg font-black text-white leading-none mb-1 tracking-tighter">
+                <p className="text-base font-black text-white leading-none mb-0.5 tracking-tighter">
                   {profile?.cashBalance ? `$${profile.cashBalance.toLocaleString()}` : '$0.00'}
                 </p>
-                <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">Available</p>
+                <p className="text-[9px] text-primary font-black uppercase tracking-[0.2em]">Available</p>
               </div>
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-white/10 flex items-center justify-center p-0.5 group-hover:scale-110 transition-transform duration-500 shadow-2xl">
-                <div className="w-full h-full rounded-[14px] bg-[#0f172a] flex items-center justify-center overflow-hidden">
-                  <User className="w-6 h-6 text-white/40 group-hover:text-primary transition-colors" />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-white/10 flex items-center justify-center p-0.5 group-hover:scale-110 transition-transform duration-500 shadow-2xl">
+                <div className="w-full h-full rounded-[10px] bg-[#0f172a] flex items-center justify-center overflow-hidden">
+                  <User className="w-4 h-4 text-white/40 group-hover:text-primary transition-colors" />
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="p-6 lg:p-10 max-w-7xl mx-auto w-full relative z-10"
+              className="p-4 lg:p-8 max-w-7xl mx-auto w-full relative z-10"
             >
               {children}
             </motion.div>

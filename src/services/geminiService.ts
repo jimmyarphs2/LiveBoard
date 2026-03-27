@@ -1,12 +1,12 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
-
 export const geminiService = {
   async generateContent(prompt: string, systemInstruction?: string): Promise<string> {
     try {
+      const apiKey = (process.env.API_KEY || process.env.GEMINI_API_KEY) as string;
+      const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-flash-latest",
         contents: prompt,
         config: {
           systemInstruction: systemInstruction || "You are a helpful assistant for Boardly, a creator monetization platform.",

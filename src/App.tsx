@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from './lib/firebase';
 import { useAuthStore } from './store/useAuthStore';
 import { Toaster } from './components/ui/sonner';
@@ -26,11 +26,19 @@ export default function App() {
   const { setUser, setRole, setProfile, setAuthReady, isAuthReady } = useAuthStore();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+    let unsubscribeProfile: (() => void) | null = null;
+
+    const unsubscribeAuth = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (unsubscribeProfile) {
+        unsubscribeProfile();
+        unsubscribeProfile = null;
+      }
+
       if (firebaseUser) {
         setUser(firebaseUser);
-        try {
-          const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
+        
+        // Listen to user document for real-time profile updates (like balance)
+        unsubscribeProfile = onSnapshot(doc(db, 'users', firebaseUser.uid), async (userDoc) => {
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setRole(userData.role);
@@ -49,18 +57,23 @@ export default function App() {
             setRole(null);
             setProfile(null);
           }
-        } catch (error) {
-          console.error('Error fetching user profile:', error);
-        }
+          setAuthReady(true);
+        }, (error) => {
+          console.error('Error listening to user profile:', error);
+          setAuthReady(true);
+        });
       } else {
         setUser(null);
         setRole(null);
         setProfile(null);
+        setAuthReady(true);
       }
-      setAuthReady(true);
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeProfile) (unsubscribeProfile as () => void)();
+    };
   }, [setUser, setRole, setProfile, setAuthReady]);
 
   if (!isAuthReady) {

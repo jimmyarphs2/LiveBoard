@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { doc, getDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, collection, addDoc, serverTimestamp, updateDoc, increment } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../../lib/firebase';
 import { useAuthStore } from '../../store/useAuthStore';
@@ -17,7 +17,7 @@ import { Star, MapPin, Clock, CheckCircle2, Zap, ShieldCheck, TrendingUp, Users,
 
 export default function CreatorProfile() {
   const { id } = useParams();
-  const { user, role } = useAuthStore();
+  const { user, profile, role } = useAuthStore();
   const navigate = useNavigate();
   const [creator, setCreator] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -48,28 +48,53 @@ export default function CreatorProfile() {
 
   const handleBook = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !creator || !selectedAd) return;
+    if (!user || !creator || !selectedAd || !profile) return;
     
     setBookingLoading(true);
     try {
       const price = creator.pricing[selectedAd];
+      const platformFee = price * 0.15;
+      const totalPrice = price + platformFee;
+
+      if ((profile.cashBalance || 0) < totalPrice) {
+        throw new Error(`Insufficient funds. You need $${totalPrice.toFixed(2)} but only have $${(profile.cashBalance || 0).toFixed(2)}`);
+      }
       
       const bookingData = {
         advertiserId: user.uid,
         creatorId: creator.userId,
         adType: selectedAd,
         price,
+        platformFee,
+        totalPrice,
         status: 'pending',
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp()
       };
+
+      // Deduct from advertiser balance
+      const advertiserRef = doc(db, 'users', user.uid);
+      await updateDoc(advertiserRef, {
+        cashBalance: increment(-totalPrice)
+      });
+
+      // Log transaction
+      await addDoc(collection(db, 'transactions'), {
+        userId: user.uid,
+        type: 'payment',
+        amount: -totalPrice,
+        currency: 'USD',
+        status: 'completed',
+        reference: `Campaign Booking: ${selectedAd} with @${creator.tiktokHandle}`,
+        createdAt: serverTimestamp()
+      });
 
       await addDoc(collection(db, 'bookings'), bookingData);
       
       // Log interaction for discovery engine
       await logInteraction(user.uid, creator.id, InteractionType.BOOKING);
       
-      toast.success('Booking request sent successfully!');
+      toast.success('Booking request sent and payment secured in escrow!');
       navigate('/dashboard/advertiser');
     } catch (error: any) {
       toast.error(error.message || 'Failed to book ad space');
@@ -159,10 +184,10 @@ export default function CreatorProfile() {
               
               {role === 'advertiser' && (
                 <Dialog>
-                  <DialogTrigger render={<Button size="lg" className="h-20 px-12 rounded-full bg-primary text-white hover:bg-primary/90 shadow-2xl shadow-primary/30 font-black text-xl uppercase tracking-widest group">
-                      Book Campaign
-                      <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                    </Button>} />
+                  <DialogTrigger render={<Button size="lg" className="h-20 px-12 rounded-full bg-primary text-white hover:bg-primary/90 shadow-2xl shadow-primary/30 font-black text-xl uppercase tracking-widest group" />}>
+                    Book Campaign
+                    <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                  </DialogTrigger>
                   <DialogContent className="bg-[#020617] border-white/10 text-white sm:max-w-lg rounded-[3rem] p-10 backdrop-blur-3xl">
                     <DialogHeader>
                       <DialogTitle className="text-4xl font-black font-heading tracking-tighter mb-6">Book {creator.tiktokHandle}</DialogTitle>

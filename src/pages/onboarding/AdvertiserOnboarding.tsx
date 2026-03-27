@@ -87,32 +87,32 @@ export default function AdvertiserOnboarding() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-2xl relative z-10"
+        className="w-full max-w-xl relative z-10"
       >
-        <div className="bg-[#0f172a]/40 border border-white/10 backdrop-blur-3xl rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden">
+        <div className="bg-[#0f172a]/40 border border-white/10 backdrop-blur-3xl rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
           
-          <div className="mb-12">
-            <div className="flex items-center gap-5">
-              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20">
-                <Building2 className="text-primary w-7 h-7 glow-primary" />
+          <div className="mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+                <Building2 className="text-primary w-5 h-5 glow-primary" />
               </div>
               <div>
-                <h1 className="text-4xl font-black text-white tracking-tighter font-heading">
+                <h1 className="text-2xl font-black text-white tracking-tighter font-heading">
                   BRAND PROFILE
                 </h1>
-                <p className="text-white/40 text-lg font-medium tracking-tight">
+                <p className="text-white/40 text-sm font-medium tracking-tight">
                   Tell us about your brand and campaign goals.
                 </p>
               </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-10">
-            <div className="space-y-8">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 ml-1">
-                  <Label htmlFor="brandName" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Brand / Company Name</Label>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 ml-1">
+                  <Label htmlFor="brandName" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Brand / Company Name</Label>
                   <InfoTooltip 
                     content="The name of your brand or agency." 
                     example="Lumina Tech"
@@ -120,21 +120,21 @@ export default function AdvertiserOnboarding() {
                   />
                 </div>
                 <div className="relative group">
-                  <Building2 className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
+                  <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
                   <Input 
                     id="brandName" 
                     placeholder="Acme Corp" 
                     value={formData.brandName}
                     onChange={(e) => setFormData({...formData, brandName: e.target.value})}
                     required
-                    className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                    className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                   />
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 ml-1">
-                  <Label htmlFor="website" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Website URL</Label>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 ml-1">
+                  <Label htmlFor="website" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Website URL</Label>
                   <InfoTooltip 
                     content="Your official brand website or landing page." 
                     example="https://mylumina.com"
@@ -142,7 +142,7 @@ export default function AdvertiserOnboarding() {
                   />
                 </div>
                 <div className="relative group">
-                  <LinkIcon className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
+                  <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
                   <Input 
                     id="website" 
                     type="url"
@@ -150,7 +150,7 @@ export default function AdvertiserOnboarding() {
                     value={formData.website}
                     onChange={(e) => setFormData({...formData, website: e.target.value})}
                     required
-                    className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium"
+                    className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium"
                   />
                 </div>
                 <div className="px-1">
@@ -162,10 +162,10 @@ export default function AdvertiserOnboarding() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 ml-1">
-                    <Label htmlFor="industry" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Industry</Label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 ml-1">
+                    <Label htmlFor="industry" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Industry</Label>
                     <InfoTooltip 
                       content="The primary sector your brand operates in." 
                       example="E-commerce / SaaS"
@@ -173,9 +173,9 @@ export default function AdvertiserOnboarding() {
                     />
                   </div>
                   <div className="relative group">
-                    <Globe className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors z-10" />
+                    <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors z-10" />
                     <Select value={formData.industry} onValueChange={(v) => setFormData({...formData, industry: v})}>
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium">
+                      <SelectTrigger className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium">
                         <SelectValue placeholder="Select industry" />
                       </SelectTrigger>
                       <SelectContent className="bg-[#0f172a] border-white/10 text-white backdrop-blur-3xl">
@@ -190,9 +190,9 @@ export default function AdvertiserOnboarding() {
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 ml-1">
-                    <Label htmlFor="campaignGoal" className="text-[11px] font-black uppercase tracking-[0.3em] text-white/40">Campaign Goal</Label>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 ml-1">
+                    <Label htmlFor="campaignGoal" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Campaign Goal</Label>
                     <InfoTooltip 
                       content="What you hope to achieve with your ad placements." 
                       example="Brand Awareness / Direct Sales"
@@ -200,9 +200,9 @@ export default function AdvertiserOnboarding() {
                     />
                   </div>
                   <div className="relative group">
-                    <Target className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors z-10" />
+                    <Target className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors z-10" />
                     <Select value={formData.campaignGoal} onValueChange={(v) => setFormData({...formData, campaignGoal: v})}>
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white pl-14 h-16 rounded-2xl focus:ring-primary/30 focus:border-primary/50 transition-all text-lg font-medium">
+                      <SelectTrigger className="bg-white/5 border-white/10 text-white pl-11 h-12 rounded-xl focus:ring-primary/30 focus:border-primary/50 transition-all text-base font-medium">
                         <SelectValue placeholder="Select goal" />
                       </SelectTrigger>
                       <SelectContent className="bg-[#0f172a] border-white/10 text-white backdrop-blur-3xl">
@@ -219,19 +219,19 @@ export default function AdvertiserOnboarding() {
 
             <Button 
               type="submit" 
-              className="w-full mt-10 bg-primary hover:bg-primary/90 h-20 rounded-2xl font-black text-xl uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden" 
+              className="w-full mt-6 bg-primary hover:bg-primary/90 h-14 rounded-xl font-black text-base uppercase tracking-widest shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden" 
               disabled={loading || !isUrlSafe}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               {loading ? (
-                <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   Saving...
                 </div>
               ) : (
                 <>
                   Complete Profile
-                  <Rocket className="w-6 h-6 ml-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <Rocket className="w-5 h-5 ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </>
               )}
             </Button>

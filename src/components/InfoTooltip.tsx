@@ -18,24 +18,24 @@ export function InfoTooltip({ content, example, whyItMatters }: InfoTooltipProps
       <PopoverTrigger className="inline-flex items-center justify-center rounded-full p-0.5 text-zinc-500 hover:text-zinc-300 transition-colors focus:outline-none">
         <HelpCircle className="h-3.5 w-3.5" />
       </PopoverTrigger>
-      <PopoverContent className="w-80 bg-zinc-900 border-zinc-800 text-zinc-200 p-4 shadow-xl">
-        <div className="space-y-3">
+      <PopoverContent className="w-64 bg-zinc-900 border-zinc-800 text-zinc-200 p-3 shadow-xl">
+        <div className="space-y-2">
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">What this is</h4>
-            <p className="text-sm leading-relaxed">{content}</p>
+            <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 mb-0.5">What this is</h4>
+            <p className="text-[13px] leading-relaxed">{content}</p>
           </div>
           
           {example && (
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Example</h4>
-              <p className="text-sm italic text-zinc-400">"{example}"</p>
+              <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 mb-0.5">Example</h4>
+              <p className="text-[13px] italic text-zinc-400">"{example}"</p>
             </div>
           )}
           
           {whyItMatters && (
             <div className="pt-2 border-t border-zinc-800">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Why it matters</h4>
-              <p className="text-sm text-indigo-400 font-medium">{whyItMatters}</p>
+              <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 mb-0.5">Why it matters</h4>
+              <p className="text-[13px] text-indigo-400 font-medium">{whyItMatters}</p>
             </div>
           )}
         </div>
