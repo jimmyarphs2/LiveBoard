@@ -1,0 +1,5 @@
+{
+  "name": "Boardly",
+  "description": "The premium marketplace for TikTok Live creators to monetize their physical and digital ad space. AI-powered pricing, discovery, and safety for global advertisers.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation"]
+}

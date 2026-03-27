@@ -1,0 +1,230 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the platform (Creator, Advertiser, or Admin)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["creator", "advertiser", "admin"] },
+        "status": { "type": "string", "enum": ["active", "suspended", "pending"] },
+        "createdAt": { "type": "timestamp" },
+        "cashBalance": { "type": "number", "description": "Withdrawable funds in USD" },
+        "coinBalance": { "type": "number", "description": "AI Coins for platform features" }
+      },
+      "required": ["uid", "email", "role", "status", "createdAt", "cashBalance", "coinBalance"]
+    },
+    "CreatorProfile": {
+      "title": "CreatorProfile",
+      "description": "Details specific to a creator",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Reference to users collection" },
+        "tiktokHandle": { "type": "string" },
+        "followerCount": { "type": "number" },
+        "avgViewers": { "type": "number" },
+        "niche": { "type": "string" },
+        "country": { "type": "string" },
+        "isEligible": { "type": "boolean" },
+        "tier": { "type": "string", "enum": ["starter", "growth", "premium", "elite"] },
+        "adTypes": { "type": "array", "items": { "type": "string" } },
+        "pricing": { "type": "object" },
+        "bio": { "type": "string" },
+        "trustScore": { "type": "number" },
+        "growthStage": { "type": "string", "enum": ["onboarding", "active", "growth_mode"] },
+        "discoverySignals": {
+          "type": "object",
+          "properties": {
+            "responseTime": { "type": "number" },
+            "successRate": { "type": "number" },
+            "repeatBookings": { "type": "number" },
+            "lastActive": { "type": "timestamp" },
+            "completeness": { "type": "number", "description": "0-1 score" },
+            "responseSpeed": { "type": "number", "description": "Average response time in minutes" },
+            "deliveryRate": { "type": "number", "description": "0-1 score" },
+            "disputeRate": { "type": "number", "description": "0-1 score" },
+            "satisfaction": { "type": "number", "description": "0-5 rating" },
+            "views": { "type": "number" },
+            "clicks": { "type": "number" },
+            "bookings": { "type": "number" }
+          }
+        }
+      },
+      "required": ["userId", "tiktokHandle", "followerCount", "isEligible", "growthStage", "tier"]
+    },
+    "AdvertiserProfile": {
+      "title": "AdvertiserProfile",
+      "description": "Details specific to an advertiser",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "brandName": { "type": "string" },
+        "website": { "type": "string" },
+        "industry": { "type": "string" },
+        "targetCountries": { "type": "array", "items": { "type": "string" } },
+        "discoverySignals": {
+          "type": "object",
+          "properties": {
+            "pastCategories": { "type": "array", "items": { "type": "string" } },
+            "budgetRange": { 
+              "type": "object",
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              }
+            },
+            "locationPreference": { "type": "array", "items": { "type": "string" } },
+            "clicks": { "type": "number" },
+            "bookings": { "type": "number" }
+          }
+        }
+      },
+      "required": ["userId", "brandName", "industry"]
+    },
+    "DiscoveryInteraction": {
+      "title": "DiscoveryInteraction",
+      "description": "Tracks user interactions with the discovery engine",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "targetId": { "type": "string" },
+        "type": { "type": "string", "enum": ["view", "click", "booking"] },
+        "timestamp": { "type": "timestamp" }
+      },
+      "required": ["userId", "targetId", "type", "timestamp"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "An ad placement booking",
+      "type": "object",
+      "properties": {
+        "advertiserId": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "adType": { "type": "string" },
+        "price": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "declined", "active", "proof_submitted", "completed", "disputed", "refunded"] },
+        "creativeUrl": { "type": "string" },
+        "creativeText": { "type": "string" },
+        "proofUrl": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      },
+      "required": ["advertiserId", "creatorId", "adType", "price", "status", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial ledger entry",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["deposit", "withdrawal", "payment", "earning", "refund", "coin_purchase"] },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "completed", "failed"] },
+        "reference": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["userId", "type", "amount", "currency", "status", "createdAt"]
+    },
+    "AiGrowthLog": {
+      "title": "AiGrowthLog",
+      "description": "Log of AI coaching sessions for sub-10k creators",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "milestones": { "type": "array", "items": { "type": "string" } },
+        "lastSessionAt": { "type": "timestamp" },
+        "coinsSpent": { "type": "number" }
+      },
+      "required": ["userId", "lastSessionAt", "coinsSpent"]
+    },
+    "BoxBattleApplication": {
+      "title": "BoxBattleApplication",
+      "description": "Application for sponsored box battles",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "tiktokHandle": { "type": "string" },
+        "followerCount": { "type": "number" },
+        "giftingLevel": { "type": "string" },
+        "pastCoins": { "type": "number" },
+        "leagueLevel": { "type": "string" },
+        "category": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "aiScore": { "type": "number" },
+        "aiFeedback": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["userId", "tiktokHandle", "status", "createdAt"]
+    },
+    "SafetyLog": {
+      "title": "SafetyLog",
+      "description": "Automated safety scan results",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "content": { "type": "string" },
+        "contentType": { "type": "string", "enum": ["text", "link", "image"] },
+        "isSafe": { "type": "boolean" },
+        "riskLevel": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "reason": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["userId", "content", "isSafe", "riskLevel", "createdAt"]
+    },
+    "PlatformConfig": {
+      "title": "PlatformConfig",
+      "description": "Global configuration managed by admin",
+      "type": "object",
+      "properties": {
+        "minFollowers": { "type": "number" },
+        "minTrustScore": { "type": "number" },
+        "allowedAdFormats": { "type": "array", "items": { "type": "string" } },
+        "coinPricing": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/config/global": {
+      "schema": { "$ref": "#/entities/PlatformConfig" },
+      "description": "Global settings"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Core user accounts"
+    },
+    "/creators/{creatorId}": {
+      "schema": { "$ref": "#/entities/CreatorProfile" },
+      "description": "Creator specific data"
+    },
+    "/advertisers/{advertiserId}": {
+      "schema": { "$ref": "#/entities/AdvertiserProfile" },
+      "description": "Advertiser specific data"
+    },
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/Booking" },
+      "description": "Ad placement bookings and escrow"
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Immutable financial ledger"
+    },
+    "/growth_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AiGrowthLog" },
+      "description": "AI coaching history"
+    },
+    "/box_battle_apps/{appId}": {
+      "schema": { "$ref": "#/entities/BoxBattleApplication" },
+      "description": "Box battle sponsorship applications"
+    },
+    "/safety_logs/{logId}": {
+      "schema": { "$ref": "#/entities/SafetyLog" },
+      "description": "Content safety audit trail"
+    },
+    "/discovery_interactions/{interactionId}": {
+      "schema": { "$ref": "#/entities/DiscoveryInteraction" },
+      "description": "Discovery interaction logs"
+    }
+  }
+}
